@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         String parametro;
-        System.out.println("Borrador de directorios 3000");
+        System.out.println("Borrador de archivos 3000");
         try{
         parametro=args[0];}
         catch (ArrayIndexOutOfBoundsException e) {

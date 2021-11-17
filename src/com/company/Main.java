@@ -11,6 +11,7 @@ public class Main {
         File archivoEscribir = new File("Departamentos.dat");
         RandomAccessFile archivoacesso = new RandomAccessFile(archivoEscribir, "rw");
         StringBuffer stringBuffer;
+        //comentar desde aqui con /* has el final para dehabilitar creacion deun dat original
         int[] depsEscribir ={10,20,30,40,50,60};
         String[] nombreEscribir ={"Manuel","Rosa","Gema","Jaime","Chema","Alvaro"};
         String[] localidadEscribir ={"Sevilla","Madrid","Jerez","Barcelona","Mérida","Bilbao"};
@@ -24,7 +25,7 @@ public class Main {
             archivoacesso.writeChars(stringBuffer.toString());
         }
         archivoacesso.close();
-
+        ///////////////////////////////////////////////////////////// */ Borrar lineas de comentario para comentar creacion de dat original
         File archivoLeer= new File("Departamentos.dat");
         archivoacesso = new RandomAccessFile(archivoLeer, "rw");
         int depsleer;

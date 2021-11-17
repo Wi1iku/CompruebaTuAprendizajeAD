@@ -1,7 +1,8 @@
 package com.company;
 
-import java.io.*;
-import java.util.Locale;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Scanner;
 
 public class Main {
@@ -25,13 +26,14 @@ public class Main {
         archivoacesso.close();
 
         File archivoLeer= new File("Departamentos.dat");
-        archivoacesso = new RandomAccessFile(archivoLeer, "r");
+        archivoacesso = new RandomAccessFile(archivoLeer, "rw");
         int depsleer;
         char[] nombreLeer= new char[15];
         char[] localidadLeer= new char[15];
         int posicionfich=0;
         while (true){
             archivoacesso.seek(posicionfich);
+            //System.out.println(archivoacesso.getFilePointer()+"aaaaaaaaaaaaaaaaaaasasafafsawarewa21");
             depsleer=archivoacesso.readInt();
            // System.out.println(archivoacesso.getFilePointer());
 
@@ -53,7 +55,7 @@ public class Main {
            // System.out.println(archivoacesso.getFilePointer());
 
             posicionfich=posicionfich+64;
-            if(archivoacesso.getFilePointer()==archivoacesso.length()){break;};
+            if(archivoacesso.getFilePointer()==archivoacesso.length()){break;}
         }
         Scanner teclao = new Scanner(System.in);
         while (true){
@@ -67,18 +69,92 @@ public class Main {
                 System.out.println("Error, introduce o 0 o 1");
             }
         }
+        archivoacesso.close();
+        int depsuser=0;
+        for(;;) {
+            try {
+                System.out.println("Introduce el numero de departamento a modificar(multiplos de 10, de 1 a 6)");
+                depsuser = teclao.nextInt();
+            } catch (Exception e) {
+                teclao.nextLine();
+            }
 
-        int depsuser;
-        for(;;){
-        try{
-            System.out.println("Introduce el numero de departamento a modificar(multiplos de 10, de 1 a 6)");
-           depsuser= teclao.nextInt();
-           break;
-        }catch (Exception e){
-            System.out.println("Introduce un numero, multiplo de 10, de 1 a 6");
-            teclao.nextLine();
+            if (depsuser < 10 || depsuser > 60 || (depsuser%10)!=0) {
+                System.out.println("El numero de departamento introducido no es valido");
+            }else {break;
+              }
         }
-    }
+        File archivouser= new File("Departamentos.dat");
+        archivoacesso = new RandomAccessFile(archivouser, "rw");
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        posicionfich=((depsuser/10)-1)*64;
+        archivoacesso.seek(posicionfich);
+        char[] nombreUseranti= new char[15];
+        char[] localidadUseranti= new char[15];
+        for (int i = 0; i < 15; i++) {
+            nombreUseranti[i]=archivoacesso.readChar();
+        }
+        for (int i = 0; i < 15; i++) {
+            localidadUseranti[i]= archivoacesso.readChar();
+        }
+        String nombreuserantistring = new String(nombreUseranti);
+        String localidaduserantistring= new String(localidadUseranti);
+
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       // System.out.println(archivoacesso.getFilePointer() + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        System.out.println("Has seleccionado el departamento "+depsuser);
+        posicionfich=((depsuser/10)-1)*64;
+        //System.out.println(posicionfich);
+        teclao.nextLine();
+        archivoacesso.seek(posicionfich);
+        //System.out.println(archivoacesso.getFilePointer() + "llllllllllllllllllllll");
+
+        archivoacesso.writeInt(depsuser);
+        //System.out.println(archivoacesso.getFilePointer() + "llllllllllllllllllllll");
+
+        System.out.println("Introduce nombre nuevo: ");
+        stringBuffer=new StringBuffer(teclao.nextLine());
+        stringBuffer.setLength(15);
+
+        archivoacesso.writeChars(stringBuffer.toString());//nombre
+
+        //System.out.println(archivoacesso.getFilePointer() + "aaaaaaaaaaaaaaaaaaasaaaaaaaaaaaaaaaaaaaaaaaa2222222222222222222222222222aaaaaaaaaaaaaaaaaaaaaaaa");
+
+        System.out.println("Introduce localidad nueva");
+        stringBuffer=new StringBuffer(teclao.nextLine());
+        stringBuffer.setLength(15);
+        archivoacesso.writeChars(stringBuffer.toString());
+        //localidad
+        archivoacesso.seek(posicionfich);
+        //System.out.println(archivoacesso.getFilePointer() + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        //System.out.println(archivoacesso.getFilePointer() + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        System.out.println(archivoacesso.readInt());
+        char[] nombreUser= new char[15];
+        char[] localidadUser= new char[15];
+        for (int i = 0; i < 15; i++) {
+            nombreUser[i]=archivoacesso.readChar();
+        }
+        for (int i = 0; i < 15; i++) {
+           localidadUser[i]= archivoacesso.readChar();
+        }
+        String nombreusersenial= new String(nombreUser);
+        String localidaduserenial= new String(localidadUser);
+        System.out.println(nombreusersenial);
+        System.out.println(localidaduserenial);
+        System.out.println("Has modificado la entrada de deparmamento "+depsuser+"\n" +
+                "Entrada antigua:\n"+
+                "Nombre: "+nombreuserantistring+"\n"+
+                "Localidad: "+localidaduserantistring+"\n" +
+                "Por la entrada actualizada\n" +
+                "Nombre: "+nombreusersenial+"\n" +
+                "Localidad: "+localidaduserenial);
+
+
 
 
 

@@ -1,6 +1,8 @@
 package com.company;
 
 import java.io.*;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Main {
 
@@ -53,6 +55,30 @@ public class Main {
             posicionfich=posicionfich+64;
             if(archivoacesso.getFilePointer()==archivoacesso.length()){break;};
         }
+        Scanner teclao = new Scanner(System.in);
+        while (true){
+            System.out.println("Has llegado a la mitad del programa, para cerrar el programa introducce 0, si deseas continuar introduce 1");
+            char intro=teclao.next().charAt(0);
+            if (intro=='1'){
+                break;
+            }else if (intro=='0'){
+                System.exit(30);
+            }else {
+                System.out.println("Error, introduce o 0 o 1");
+            }
+        }
+
+        int depsuser;
+        for(;;){
+        try{
+            System.out.println("Introduce el numero de departamento a modificar(multiplos de 10, de 1 a 6)");
+           depsuser= teclao.nextInt();
+           break;
+        }catch (Exception e){
+            System.out.println("Introduce un numero, multiplo de 10, de 1 a 6");
+            teclao.nextLine();
+        }
+    }
 
 
 

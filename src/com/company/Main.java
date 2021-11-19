@@ -13,7 +13,7 @@ public class Main {
     static ArrayList<String>nombres = new ArrayList<>();
     static ArrayList<String>localidads= new ArrayList<>();
     public static void main(String[] args) throws IOException {
-        File xml= new File("xml.xml");
+        File xml= new File("empleados.xml");
 
         DataOutputStream xmlwrite = new DataOutputStream(new FileOutputStream(xml));
         File fichero = new File("Departamentos.dat");

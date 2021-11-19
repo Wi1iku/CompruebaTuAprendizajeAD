@@ -5,6 +5,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 
@@ -13,9 +14,8 @@ public class Main {
     static ArrayList<String>nombres = new ArrayList<>();
     static ArrayList<String>localidads= new ArrayList<>();
     public static void main(String[] args) throws IOException {
-        File xml= new File("Empleado-array.xml");
-
-        DataOutputStream xmlwrite = new DataOutputStream(new FileOutputStream(xml));
+        File xml= new File("Empleado-array.dat");
+        FileWriter xmlwrite = new FileWriter(xml);
         File fichero = new File("Departamentos.dat");
         RandomAccessFile acceso= new RandomAccessFile(fichero, "r");
         XStream xStream= new XStream(new StaxDriver());
@@ -42,8 +42,9 @@ public class Main {
         }
 
         String xmls= xStream.toXML(eEmpleados);
-        xmlwrite.writeUTF(xmls);
-
+        xmlwrite.write(xmls);
+        System.out.println("Operacion realizada");
+        xmlwrite.close();
 
  }
 }

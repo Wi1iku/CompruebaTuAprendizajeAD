@@ -58,7 +58,7 @@ public class Main {
                     check = 0;
                 }
             } while (check != -1);
-            int posicionfich = depsuser - 1;
+            int posicionfich = (depsuser-1)*64;
             archivoacesso.seek(posicionfich);
             archivoacesso.writeInt(0);
             //System.out.println(archivoacesso.getFilePointer()+"deps");
@@ -98,7 +98,7 @@ public class Main {
                 while (true) {
                     posicionfich = (64 * cont);
                     archivoacesso.seek(posicionfich);
-                   // System.out.println(archivoacesso.getFilePointer());
+                   //System.out.println(archivoacesso.getFilePointer());
                     int depnumba=archivoacesso.readInt();
                     ////////////////////
                     if (!depts.contains(depnumba) && depnumba!=0){

@@ -30,20 +30,20 @@ public class Main {
             while (check){
                 acceso.seek(posicionfich);
                 deps=acceso.readInt();
-                System.out.println(acceso.getFilePointer()+"departamentp");
+               // System.out.println(acceso.getFilePointer()+"departamentp");
 
                 for (int i = 0; i < nombre.length ; i++) {
                     nombre[i]=acceso.readChar();
                 }
                 String nombreString = new String(nombre);
-                System.out.println(acceso.getFilePointer()+"apellido");
+                //System.out.println(acceso.getFilePointer()+"apellido");
 
                 for (int i = 0; i < locali.length ; i++) {
 
                     locali[i]=acceso.readChar();
                 }
-                System.out.println(acceso.getFilePointer()+"loclaiad");
-                System.out.println(acceso.length()+"totalfichero");
+                //System.out.println(acceso.getFilePointer()+"loclaiad");
+                //System.out.println(acceso.length()+"totalfichero");
                 String localiString = new String(locali);
                 if (deps>=1 && deps%10==0){
                     Element raiz = documentoxml.createElement("empleado");
@@ -63,6 +63,7 @@ public class Main {
             Result resultado = new StreamResult(new java.io.File("test.xml"));
             Transformer optimusprime = TransformerFactory.newInstance().newTransformer();
             optimusprime.transform(sauce,resultado);
+            System.out.println("XML creado");
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();

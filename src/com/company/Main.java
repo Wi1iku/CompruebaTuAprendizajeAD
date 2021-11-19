@@ -18,17 +18,22 @@ public class Main {
         RandomAccessFile archivoacesso = new RandomAccessFile(archivoEscribir, "rw");
         StringBuffer stringBuffer;
         //comentar desde aqui con /* has el final para dehabilitar creacion deun dat original
+       // System.out.println(archivoacesso.length()+"tamaño total");
         int[] depsEscribir ={1,2,3,4,5,6};
         String[] nombreEscribir ={"Manuel","Rosa","Gema","Jaime","Chema","Alvaro"};
         String[] localidadEscribir ={"Sevilla","Madrid","Jerez","Barcelona","Mérida","Bilbao"};
         for (int i = 0; i < depsEscribir.length ; i++) {
             archivoacesso.writeInt(depsEscribir[i]);
+            //System.out.println(archivoacesso.getFilePointer()+"deps");
             stringBuffer=new StringBuffer(nombreEscribir[i]);
             stringBuffer.setLength(15);
             archivoacesso.writeChars(stringBuffer.toString());
+            //System.out.println(archivoacesso.getFilePointer()+"mombrecraear");
             stringBuffer=new StringBuffer(localidadEscribir[i]);
             stringBuffer.setLength(15);
+
             archivoacesso.writeChars(stringBuffer.toString());
+            //System.out.println(archivoacesso.getFilePointer()+"localcrear");
         }
         archivoacesso.close();
         /////////////////////////////////////////////////////////////////
@@ -56,12 +61,13 @@ public class Main {
             int posicionfich = depsuser - 1;
             archivoacesso.seek(posicionfich);
             archivoacesso.writeInt(0);
+            //System.out.println(archivoacesso.getFilePointer()+"deps");
             stringBuffer = new StringBuffer("               ");
             stringBuffer.setLength(15);
             archivoacesso.writeChars(stringBuffer.toString());
-            System.out.println(archivoacesso.getFilePointer());
+            //System.out.println(archivoacesso.getFilePointer()+"nombre");
             archivoacesso.writeChars(stringBuffer.toString());
-            System.out.println(archivoacesso.getFilePointer());
+            //System.out.println(archivoacesso.getFilePointer()+"apellido");
             int cont = 0;
             int cont2 = 0;
 
@@ -87,6 +93,7 @@ public class Main {
             archivoacesso.seek(posicionfich);
             //System.out.println(archivoacesso.getFilePointer());
             //System.out.println(archivoacesso.length()+"aaaaaaaaaaaaaa");
+
             try {
                 while (true) {
                     posicionfich = (64 * cont);
@@ -98,13 +105,18 @@ public class Main {
                         depts.add(depnumba);
 
                     }
-                    archivoacesso.getFilePointer();
+                    //System.out.println(archivoacesso.getFilePointer());
                     cont++;
+                    if (archivoacesso.getFilePointer()==archivoacesso.length()-60){
+                        //System.out.println("archivo cerrado sin petar");
+                        break;
+                    }
                 }
             }catch (EOFException e){
                 //isobum
                 //System.out.println("bucle finalizado");
             }
+            System.out.println("Datos de departamento "+depsuser+" han sido eliminados");
             System.out.println("Hay "+depts.size()+" distintos departamentos");
 
         }

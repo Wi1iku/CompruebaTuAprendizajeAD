@@ -25,21 +25,17 @@ public class Main {
         char[] localidad = new char[15];
         xStream.alias("Empleado",Empleado.class);
         xStream.alias("Empleados",Empleados.class);
-        int cont = 0;
-        while (true){
+        do {
             deps.add(acceso.readInt());
-            for (int i = 0; i < nombre.length ; i++) {
-                nombre[i]= acceso.readChar();
+            for (int i = 0; i < nombre.length; i++) {
+                nombre[i] = acceso.readChar();
             }
             nombres.add(new String(nombre).trim());
-            for (int i = 0; i <localidad.length ; i++) {
-                localidad[i]= acceso.readChar();
+            for (int i = 0; i < localidad.length; i++) {
+                localidad[i] = acceso.readChar();
             }
             localidads.add(new String(localidad).trim());
-            if (acceso.getFilePointer()==acceso.length()){
-                break;
-            }
-        }
+        } while (acceso.getFilePointer() != acceso.length());
         Empleado[] arrayemps= new Empleado[deps.size()];
         Empleados empleados = new Empleados(arrayemps);
         for (int i = 0; i < deps.size(); i++) {

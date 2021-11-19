@@ -23,8 +23,8 @@ public class Main {
 
         char[] nombre = new char[15];
         char[] localidad = new char[15];
-        xStream.alias("Empleado",Empleado.class);
-        xStream.alias("Empleados",Empleados.class);
+        xStream.alias("Empleado", Empleado.class);
+        //xStream.alias("Empleados",Empleados.class);
         do {
             deps.add(acceso.readInt());
             for (int i = 0; i < nombre.length; i++) {
@@ -36,13 +36,12 @@ public class Main {
             }
             localidads.add(new String(localidad).trim());
         } while (acceso.getFilePointer() != acceso.length());
-        Empleado[] arrayemps= new Empleado[deps.size()];
-        Empleados empleados = new Empleados(arrayemps);
+        Empleado[] eEmpleados= new Empleado[deps.size()];
         for (int i = 0; i < deps.size(); i++) {
-            arrayemps[i]= new Empleado(deps.get(i),nombres.get(i),localidads.get(i) );
+            eEmpleados[i]= new Empleado(deps.get(i),nombres.get(i),localidads.get(i) );
         }
 
-        String xmls= xStream.toXML(empleados);
+        String xmls= xStream.toXML(eEmpleados);
         xmlwrite.writeUTF(xmls);
 
 

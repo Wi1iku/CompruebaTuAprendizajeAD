@@ -18,7 +18,7 @@ public class Main {
             datosbin.writeInt(numerodeps[i]);
             datosbin.writeUTF(nombredeps[i]);
             datosbin.writeUTF(localidaddeps[i]);
-        }
+        }//
         System.out.println("Archivo dat creado/actualizado");
         datosbin.close();
 
